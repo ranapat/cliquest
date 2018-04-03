@@ -1,0 +1,46 @@
+{
+  "name": "cliquests",
+  "version": "1.0.0",
+  "description": "requests command line tool",
+  "keywords": [
+    "cliquests",
+    "requests",
+    "command line"
+  ],
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --compilers js:babel-register --require babel-polyfill --recursive tests",
+    "tdd": "node_modules/mocha/bin/mocha --compilers js:babel-register --require babel-polyfill --recursive tests --watch src/ tests/",
+    "serve": "node_modules/babel-cli/bin/babel.js -w src -d bin | nodemon --watch bin",
+    "watch": "node_modules/babel-cli/bin/babel.js -w src -d bin",
+    "coverage": "node_modules/.bin/babel-node node_modules/.bin/babel-istanbul cover node_modules/.bin/_mocha -- --compilers js:babel-register --require babel-polyfill --recursive tests",
+    "updatedependencies": "./node_modules/david/bin/david.js update",
+    "documentation": "node_modules/documentation/bin/documentation.js build src/** -f html -o docs && node_modules/documentation/bin/documentation.js build src/** -f md -o docs/docs.md",
+    "commitdocs": "npm run documentation && git add docs/docs.md && git add docs/index.html && git commit -m 'rebuild documentation'",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | node_modules/.bin/coveralls"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-istanbul": "^0.12.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "browserify": "^16.1.1",
+    "chai": "^4.1.2",
+    "chai-spies": "^1.0.0",
+    "coveralls": "^3.0.0",
+    "david": "^11.0.0",
+    "documentation": "^6.1.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.4"
+  },
+  "dependencies": {},
+  "author": "ranapat@gmail.com",
+  "license": "Unlicense",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@ranapat.org:/zone/repositories.git/cliquests"
+  }
+}
