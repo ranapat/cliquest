@@ -1,2 +1,2 @@
-# es6.example
-ES6 example
+# cliquests
+Command line tool for requests
