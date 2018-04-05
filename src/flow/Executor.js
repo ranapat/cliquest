@@ -44,7 +44,10 @@ class Executor {
       data: request.body
     }).then(response => {
       this._populate(index, response.data);
-      return response.data;
+      return {
+        data: response.data,
+        variables: this.chain.nodes[index].variables
+      };
     });
   }
 

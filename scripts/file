@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+
+const commandLineArgs = require('command-line-args');
+const commandLineUsage = require('command-line-usage');
+const cliquest = require('../bin');
+const Cqf = cliquest.Cqf;
+const Executor = cliquest.Executor;
+
+const help = () => {
+  const sections = [
+    {
+      header: 'File executor',
+      content: 'Parsers Json {italic Cq format} and executes specific section.'
+    },
+    {
+      header: 'Options',
+      optionList: [
+        {
+          name: 'file',
+          alias: 'f',
+          typeLabel: '{underline file}',
+          description: 'The input to process.'
+        },
+        {
+          name: 'index',
+          alias: 'i',
+          typeLabel: '{underline int}',
+          description: 'Section index to execute. Default {italic 0}.'
+        },
+        {
+          name: 'encoding',
+          alias: 'e',
+          typeLabel: '{underline string}',
+          description: 'Encoding of the file. Default {italic utf8}.'
+        },
+        {
+          name: 'variables',
+          alias: 'v',
+          description: 'Shows only variables parsed, not the full response.'
+        },
+        {
+          name: 'simple',
+          alias: 's',
+          description: 'Shows simple / simplified output.'
+        },
+        {
+          name: 'help',
+          description: 'Print this usage guide.'
+        }
+      ]
+    }
+  ]
+  const usage = commandLineUsage(sections);
+  console.log(usage);
+}
+
+const optionDefinitions = [
+  { name: 'file', alias: 'f', type: String, defaultOption: true },
+  { name: 'index', alias: 'i', type: Number },
+  { name: 'encoding', alias: 'e', type: String },
+  { name: 'variables', alias: 'v', type: Boolean },
+  { name: 'simple', alias: 's', type: Boolean },
+  { name: 'help', type: Boolean }
+];
+const options = commandLineArgs(optionDefinitions);
+
+if (options.help || !options.file) {
+  help();
+} else {
+  const chain = Cqf.parse(options.file, options.encoding);
+  if (chain) {
+    const executor = new Executor(chain);
+
+    try {
+      executor.process(options.index).then(response => {
+        if (options.simple) {
+          console.log('Variables:');
+          for (const variable of response.variables) {
+            console.log(`  ${variable.name} : ${variable.value}`);
+          }
+        } else {
+          console.log('Variables:', response.variables);
+        }
+        if (!options.variables) {
+          console.log();
+          console.log('Response:', response.data);
+        }
+      }).catch(error => {
+        console.log('Error:', error);
+      });
+    } catch (e) {
+      console.log('Exception:', e);
+    }
+  }
+}

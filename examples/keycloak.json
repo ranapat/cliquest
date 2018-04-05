@@ -1,0 +1,32 @@
+[
+  {
+    "url": "http://localhost:8080/auth/realms/master/protocol/openid-connect/token",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "client_id=admin-cli&username=admin&password=admin&grant_type=password",
+    "variables": [
+      { "name": "token", "value": "undefined", "pattern": "access_token" }
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master",
+    "method": "get",
+    "headers": [
+      "Authorization: bearer ${token}"
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://ranapat.org:8090/posting.php?request=1",
+    "method": "post",
+    "headers": [
+      "User-Agent: testing"
+    ],
+    "body": "token=${token}",
+    "variables": [
+    ]
+  }
+]
