@@ -10,7 +10,7 @@ class Cqf extends Parser {
         const parsed = JSON.parse(fs.readFileSync(path, encoding));
         for (const section of parsed) {
           for (const variable of section.variables) {
-            if (variable.pattern.indexOf('regexp*') !== -1) {
+            if (variable.pattern && variable.pattern.indexOf('regexp*') !== -1) {
               variable.pattern = new RegExp(variable.pattern.replace('regexp*', '').trim(), 'g');
             }
           }

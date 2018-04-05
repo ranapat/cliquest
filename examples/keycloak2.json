@@ -1,0 +1,24 @@
+[
+  {
+    "url": "http://10.123.74.8:8180/auth/realms/akelius/protocol/openid-connect/token",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "client_id=admin-cli&username=${username}&password=${password}&grant_type=password",
+    "variables": [
+      { "name": "username", "value": "jozsi" },
+      { "name": "password", "value": "jozsi" },
+      { "name": "token", "pattern": "access_token" }
+    ]
+  },
+  {
+    "url": "http://10.123.74.8:8083/api/v1/countries/114/langprotect",
+    "method": "get",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": "",
+    "variables": [
+    ]
+  }
+]
