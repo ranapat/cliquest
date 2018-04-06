@@ -1,0 +1,64 @@
+[
+  {
+    "url": "http://localhost:8080/auth/realms/master/protocol/openid-connect/token",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "client_id=${client_id}&client_secret=${client_secret}&grant_type=client_credentials",
+    "variables": [
+      { "name": "token", "pattern": "access_token" },
+      { "name": "client_id", "value": "cliquest" },
+      { "name": "client_secret", "value": "0ef222c3-9253-4cc9-bf47-98c64675ff01" }
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master/users",
+    "method": "get",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master/users/${userid}",
+    "method": "get",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master/users/${userid}",
+    "method": "put",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": { "username": "testing123", "enabled": "true", "emailVerified": "true" },
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master/users",
+    "method": "post",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": { "username": "testing12346789", "email": "something4@something.com", "firstName": "FirstName", "lastName": "LastName", "enabled": "true", "emailVerified": "true" },
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://localhost:8080/auth/admin/realms/master/users/c4f1d34d-2c92-4e0d-a4e0-b5f21a233831/reset-password",
+    "method": "put",
+    "headers": [
+      "Authorization: Bearer ${token}"
+    ],
+    "body": { "type": "password", "temporary": "false", "value": "testing1234567" },
+    "variables": [
+    ]
+  }
+]
