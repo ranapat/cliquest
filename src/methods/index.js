@@ -1,8 +1,10 @@
 const POST = 'post';
 const GET = 'get';
+const PUT = 'put';
+
 const methods = [
-  GET, POST
+  GET, POST, PUT
 ];
 
 export { methods };
-export { GET, POST };
+export { GET, POST, PUT };
