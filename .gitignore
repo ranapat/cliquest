@@ -6,5 +6,8 @@
 
 .coveralls.yml
 
+# Mac
+.DS_Store
+
 # Emacs
 *.*~
