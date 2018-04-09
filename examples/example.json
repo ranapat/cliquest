@@ -1,5 +1,14 @@
 [
   {
+    "url": "http://google.com",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
     "url": "http://ranapat.org:8090/posting.php?request=2",
     "method": "post",
     "headers": [
