@@ -16,8 +16,8 @@ const ui = () => {
   layout.helpP.text = [
     'l* load',
     'ctrl+p* scroll up',
-    'strl+n* scroll down',
-    'q* quit'
+    'ctrl+n* scroll down',
+    'ctrl+c* quit'
   ].join('; ');
 };
 

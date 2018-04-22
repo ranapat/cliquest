@@ -16,10 +16,12 @@ const keyboard = () => {
 
       set('general');
     } else if (13 == keycode(key)) {
-      load(path);
-      //stdin.removeListener('data', handler);
+      const result = load(path ? path : 'examples/example.json');
+      if (result !== undefined) {
+        stdin.removeListener('data', handler);
 
-      //set('project');
+        set('details', result.path, result.executor);
+      }
     } else if (keycode(key) === 127) {
       layout.helpP.text = layout.helpP.text.slice(0, -1);
 

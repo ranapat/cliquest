@@ -1,6 +1,8 @@
 const keycode = require('keycode');
 
+const { data } = require('./variables');
 const { set, getLayout } = require('../');
+const ui = require('./ui');
 
 const keyboard = () => {
   const layout = getLayout();
@@ -9,11 +11,14 @@ const keyboard = () => {
 
   const handler = (key) => {
     if (key == '\u0003') {
-      process.exit();
-    } else if (key == 'l') {
       stdin.removeListener('data', handler);
 
-      set('load');
+      set('general');
+    } else if (key == 'p') {
+      stdin.removeListener('data', handler);
+
+      ui('process');
+      keyboardProcess();
     } else if (keycode(key) == 16) {
       if (layout.paneP.text.trim()) {
         let offset = layout.paneP.options.offset;
@@ -33,6 +38,38 @@ const keyboard = () => {
     }
   };
 
+  stdin.on('data', handler);
+};
+
+const keyboardProcess = () => {
+  const layout = getLayout();
+  const stdin = process.stdin;
+  const stdout = process.stdout;
+
+  let section = '';
+
+  const handler = (key) => {
+    if (key == '\u0003') {
+      stdin.removeListener('data', handler);
+
+      ui('reset');
+      keyboard();
+    } else if (13 == keycode(key)) {
+      if (section >= 0 && section < data.executor.chain.nodes.length) {
+        stdin.removeListener('data', handler);
+
+        set('process', data.path, data.executor, section);
+      }
+    } else if (keycode(key) === 127) {
+      layout.helpP.text = layout.helpP.text.slice(0, -1);
+
+      section = section.slice(0, -1);
+    } else {
+      layout.helpP.text += key;
+
+      section += key;
+    }
+  };
   stdin.on('data', handler);
 };
 

@@ -14,8 +14,11 @@ const load = (path) => {
     if (chain) {
       const executor = new Executor(chain);
 
+      return { path, executor };
+
+      /*
       try {
-        executor.process(0).then(response => {
+        executor.process(1).then(response => {
           layout.pane.label = `* ${path} *`;
           layout.logsP.text += `loading complete` + '\n';
 
@@ -38,6 +41,7 @@ const load = (path) => {
       } catch (e) {
         layout.logsP.text += e + '\n';
       }
+      */
     } else {
       layout.logsP.text += labels.project_empty + '\n';
     }
@@ -45,7 +49,9 @@ const load = (path) => {
     layout.logsP.text += e + '\n';
   }
 
-  layout.pane.scroll = layout.paneP.options.offset;
+  //layout.pane.scroll = layout.paneP.options.offset;
+
+  return undefined;
 };
 
 module.exports = load;

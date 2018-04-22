@@ -6,7 +6,10 @@ const labels = {
   variables: 'variables',
   load_file: 'load file',
   loading_file: 'loading file',
-  project_empty: 'project is empty'
+  loading_complete: 'loading complete',
+  project_empty: 'project is empty',
+  nodes_count: 'nodes count',
+  select_node: 'select node'
 };
 
 module.exports = labels;
