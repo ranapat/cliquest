@@ -13,7 +13,7 @@ const layout = () => {
   const pane = new Pane(0, 0, maxX - 30, contentHeight, '');
   pane.show();
   const paneP = new Paragraph(2, 1, '', {
-    maxWidth: maxX - 30 - 8,
+    maxWidth: maxX - 30 - 4,
     maxHeight: contentHeight,
     wordWrap: pwwBreak,
     offset: 1
