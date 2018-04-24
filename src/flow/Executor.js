@@ -8,6 +8,7 @@ class Executor {
     this.chain = chain;
 
     this.analyzer = new Analyzer(this.chain);
+    this.tracer = undefined;
   }
 
   process(index = 0) {
@@ -43,6 +44,10 @@ class Executor {
       headers: request.xHeaders,
       data: request.body
     }).then(response => {
+      if (this.tracer && typeof this.tracer === 'function') {
+        this.tracer.apply(undefined, [ request, response ]);
+      }
+
       this._populate(index, response.data);
       return {
         request,

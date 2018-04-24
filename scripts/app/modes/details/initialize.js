@@ -9,6 +9,12 @@ const initialize = (path, executor, ...args) => {
   data.executor = executor;
   data.nodes = executor.chain.nodes.length;
 
+  executor.tracer = (request, response) => {
+    const layout = getLayout();
+
+    layout.logsP.text += labels.request_executed + ' [' + request.method + '] ' + request.url + '\n';
+  };
+
   const variables = [];
   let index = 0;
   for (const node of executor.chain.nodes) {

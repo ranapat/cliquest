@@ -11,7 +11,8 @@ const labels = {
   nodes_count: 'nodes count',
   select_node: 'select node between',
   and: 'and',
-  node_executed: 'node executed'
+  node_executed: 'node executed',
+  request_executed: 'executing request'
 };
 
 module.exports = labels;

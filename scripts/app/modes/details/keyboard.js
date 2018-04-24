@@ -1,6 +1,6 @@
 const keycode = require('keycode');
 
-const { data } = require('./variables');
+const { data, reset } = require('./variables');
 const { set, getLayout } = require('../');
 const ui = require('./ui');
 
@@ -12,6 +12,8 @@ const keyboard = () => {
   const handler = (key) => {
     if (key == '\u0003') {
       stdin.removeListener('data', handler);
+
+      reset();
 
       set('general');
     } else if (key == 'p') {
