@@ -1,6 +1,7 @@
 const keycode = require('keycode');
 
 const { set, getLayout } = require('../');
+const { labels } = require('../../settings');
 const load = require('./load');
 
 const keyboard = () => {
@@ -16,8 +17,15 @@ const keyboard = () => {
 
       set('general');
     } else if (13 == keycode(key)) {
-      const result = load(path ? path : 'examples/example.json');
+      path = path ? path : 'examples/example.json';
+      const result = load(path);
       if (result !== undefined) {
+        layout.pane.label = `* ${path} *`;
+        layout.logsP.text += labels.loading_complete + '\n';
+
+        const nodes = result.executor.chain.nodes.length;
+        layout.logsP.text += labels.nodes_count + ' ' + nodes + '\n';
+
         stdin.removeListener('data', handler);
 
         set('details', result.path, result.executor);

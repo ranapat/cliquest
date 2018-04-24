@@ -1,16 +1,15 @@
 const { labels } = require('../../settings');
 const { getLayout, resetPaneP, resetVariablesP, resetHelpP } = require('../');
+const { data } = require('./variables');
 
 const ui = (mode = 'default') => {
   const layout = getLayout();
 
   if (mode === 'default') {
-    layout.pane.label = labels.project_not_loaded;
     layout.variables.label = labels.variables;
     layout.logs.label = labels.logs;
     layout.help.label = labels.help;
 
-    resetPaneP();
     resetVariablesP();
     resetHelpP();
 
@@ -21,7 +20,7 @@ const ui = (mode = 'default') => {
       'ctrl+c* leave project'
     ].join('; ');
   } else if (mode === 'process') {
-    layout.help.label = labels.select_node;
+    layout.help.label = labels.select_node + ' ' + 0 + ' ' + labels.and + ' ' + (data.nodes - 1);
 
     resetHelpP();
   } else if (mode === 'reset') {

@@ -9,7 +9,9 @@ const labels = {
   loading_complete: 'loading complete',
   project_empty: 'project is empty',
   nodes_count: 'nodes count',
-  select_node: 'select node'
+  select_node: 'select node between',
+  and: 'and',
+  node_executed: 'node executed'
 };
 
 module.exports = labels;

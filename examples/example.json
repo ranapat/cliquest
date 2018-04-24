@@ -19,6 +19,17 @@
     ]
   },
   {
+    "url": "http://ranapat.org:8090/posting.php?request=3",
+    "method": "post",
+    "headers": [
+      "User-Agent: testing"
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var3", "pattern": "data" }
+    ]
+  },
+  {
     "url": "http://ranapat.org:8090/posting.php?request=2",
     "method": "post",
     "headers": [
@@ -26,7 +37,7 @@
     ],
     "body": "",
     "variables": [
-      { "name": "var2", "value": "undefined", "pattern": "regexp* \\[IDENTIFIER\\] => ([0-9a-zA-Z \\.\\-=\\?\\&\\/]+)" }
+      { "name": "var2", "pattern": "regexp* \\[IDENTIFIER\\] => ([0-9a-zA-Z \\.\\-=\\?\\&\\/]+)" }
     ]
   },
   {
@@ -35,9 +46,10 @@
     "headers": [
       "User-Agent: testing"
     ],
-    "body": "k1=${var1}&k2=${var2}",
+    "body": "k1=${var1}&k2=${var2}&k3=${var3}&k4=${var4}",
     "variables": [
-      { "name": "var1", "value": "undefined", "pattern": "data" }
+      { "name": "var1", "pattern": "data" },
+      { "name": "var4", "value": "var4 value", "pattern": "data" }
     ]
   }
 ]

@@ -95,6 +95,7 @@ class Analyzer {
   }
 
   _extractVariable(key, section, index) {
+    const initialIndex = index;
     let result = undefined;
 
     let variables = section.variables;
@@ -125,7 +126,10 @@ class Analyzer {
               break;
             } else {
               if (this._checkRequest(this.source.nodes[index])) {
-                if (this.dependencies.indexOf(index) === -1) {
+                if (
+                  index !== initialIndex
+                    && this.dependencies.indexOf(index) === -1
+                ) {
                   this.dependencies.push(index);
                 }
               }
