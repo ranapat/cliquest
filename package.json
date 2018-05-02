@@ -43,8 +43,10 @@
     "clicomp": "^1.0.4",
     "command-line-args": "^5.0.2",
     "command-line-usage": "^5.0.4",
+    "jsonfile": "^4.0.0",
     "keycode": "^2.2.0",
-    "prettyjson": "^1.2.1"
+    "prettyjson": "^1.2.1",
+    "sanitize-filename": "^1.6.1"
   },
   "author": "ranapat@gmail.com",
   "license": "Unlicense",

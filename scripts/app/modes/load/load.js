@@ -1,5 +1,7 @@
+const sanitize = require("sanitize-filename");
+
 const { set, getLayout } = require('../');
-const { labels, file } = require('../../settings');
+const { labels, file, cache } = require('../../settings');
 const cliquest = require('../../../../bin');
 
 const Cqf = cliquest.Cqf;
@@ -11,7 +13,7 @@ const load = (path) => {
   try {
     const chain = Cqf.parse(path, file.encoding);
     if (chain) {
-      const executor = new Executor(chain);
+      const executor = new Executor(chain, cache.path + '/' + sanitize(path, { replacement: '-' }));
 
       return { path, executor };
     } else {

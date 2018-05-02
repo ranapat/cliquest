@@ -9,25 +9,16 @@ const initialize = (path, executor, ...args) => {
   data.executor = executor;
   data.nodes = executor.chain.nodes.length;
 
+  const analyzer = executor.analyzer;
+
   executor.tracer = (request, response) => {
     const layout = getLayout();
 
     layout.logsP.append(labels.request_executed + ' [' + request.method + '] ' + request.url);
   };
 
-  const variables = [];
-  let index = 0;
-  for (const node of executor.chain.nodes) {
-    for (const variable of node.variables) {
-      variables.push({
-        index,
-        variable
-      });
-    }
-    ++index;
-  }
-  for (const variable of variables) {
-    layout.variablesP.append('[' + variable.index + '] ' + variable.variable.name + '\n' + '  ' + variable.variable.value);
+  for (const variable of analyzer.variables) {
+    layout.variablesP.append('[' + variable.index + '] ' + (variable.variable.persist === 'true' || variable.variable.persist === true? '*' : '') + variable.variable.name + '\n' + '  ' + variable.variable.value);
   }
 };
 

@@ -33,6 +33,22 @@ class Analyzer {
     }
   }
 
+  get variables() {
+    const variables = [];
+    let index = 0;
+    for (const node of this.source.nodes) {
+      for (const variable of node.variables) {
+        variables.push({
+          index,
+          variable
+        });
+      }
+      ++index;
+    }
+
+    return variables;
+  }
+
   _checkSource() {
     return this.source && Array.isArray(this.source.nodes);
   }

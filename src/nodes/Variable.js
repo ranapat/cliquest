@@ -3,6 +3,7 @@ class Variable {
     this.name = undefined;
     this.value = undefined;
     this.pattern = undefined;
+    this.persist = undefined;
   }
 }
 

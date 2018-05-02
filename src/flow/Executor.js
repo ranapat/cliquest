@@ -2,13 +2,17 @@ import axios from 'axios';
 import jp from 'jsonpath';
 
 import Analyzer from './Analyzer';
+import Persistance from './Persistance';
 
 class Executor {
-  constructor(chain) {
+  constructor(chain, persistancePath) {
     this.chain = chain;
 
     this.analyzer = new Analyzer(this.chain);
+    this.persistance = new Persistance(persistancePath);
     this.tracer = undefined;
+
+    this._preload();
   }
 
   process(index = 0) {
@@ -37,6 +41,18 @@ class Executor {
     }
   }
 
+  _preload() {
+    const persisted = this.persistance.variables;
+    const variables = this.analyzer.variables;
+    for (const p of persisted) {
+      for (const variable of variables) {
+        if (p.index === variable.index && p.variable.name === variable.variable.name) {
+          variable.variable.value = p.variable.value;
+        }
+      }
+    }
+  }
+
   _execute(index, request) {
     return axios({
       method: request.method,
@@ -49,6 +65,8 @@ class Executor {
       }
 
       this._populate(index, response.data);
+      this._persist();
+
       return {
         request,
         response: {
@@ -77,6 +95,10 @@ class Executor {
         }
       }
     }
+  }
+
+  _persist() {
+    this.persistance.variables = this.analyzer.variables;
   }
 }
 

@@ -22,6 +22,7 @@ class Cq extends Parser {
             vari.name = variable.name;
             vari.value = variable.value;
             vari.pattern = variable.pattern;
+            vari.persist = variable.persist;
             sec.variables.push(vari);
           }
         }

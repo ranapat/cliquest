@@ -1,0 +1,55 @@
+[
+  {
+    "url": "https://education.akelius.com/apiproxy/v1/moodle/flushCache",
+    "method": "get",
+    "headers": [
+      "Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik4wVXdOVE15UkVSR1JVUkNRakkxUmtWQk16QTRSRUUwTURGRlEwVXdSa0UxUVVaQ01rTkVPQSJ9.eyJodHRwczovL2FrZWxpdXMuY29tL2NsYWltcy91c2VyaWQiOiI4ZVZudm5NRXFFaWYzZ05QTCtjNFFBPT0iLCJodHRwczovL2FrZWxpdXMuY29tL2NsYWltcy9naXZlbl9uYW1lIjoiSXZheWxvIiwiaHR0cHM6Ly9ha2VsaXVzLmNvbS9jbGFpbXMvZmFtaWx5X25hbWUiOiJJbGlldiIsImh0dHBzOi8vYWtlbGl1cy5jb20vY2xhaW1zL2VtYWlsIjoiSXZheWxvLklsaWV2QGFrZWxpdXMuZGUiLCJpc3MiOiJodHRwczovL2FrZWxpdXMuZXUuYXV0aDAuY29tLyIsInN1YiI6ImFkZnN8YWtlbGl1cy1hZGZzfDhlVm52bk1FcUVpZjNnTlBMK2M0UUE9PSIsImF1ZCI6WyJodHRwczovL2VkdWNhdGlvbi1hcGkuYWtlbGl1cy5jb20vIiwiaHR0cHM6Ly9ha2VsaXVzLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1MjM5NTc5NjksImV4cCI6MTUyMzk2NTE2OSwiYXpwIjoiNXdpWkpPbWxHNmxaZDBWTmJNMkFwQk9qSlJTZkV2dkciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIn0.M3X8Z2M62ztiJWgMvJDXSO2Wbd7IiagIEJS8J3ll0_8XtBFnn9XR6c0QCdBUjoHgxLyY_PL4hKKIM3D5ZFssYpFD8q44WyOtCXvK-qE9UbhlIq9QM2qPxoFjIj8spkmZ6FCk16FyUnYy4qKzyCnv4xPILngDQbR_-miZTwnDG81Wl-ElQItjCS7Psdy8-sWtakCgOzoAV0fo6yjZsU3AX4mvuHAjveZexDGBQrl8zlEQICPZvdk2VT0RNMZtVW2a1yLnna7_L6OL6XYDgkjLhupfvO4A7jaWHfdWTkZLqAnHsgD-FnJhrq_uuGWLG7QImPhdbj_ufsgJXgg4djpdRQ"
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://google.com",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+    ]
+  },
+  {
+    "url": "http://ranapat.org:8090/posting.php?request=3",
+    "method": "post",
+    "headers": [
+      "User-Agent: testing"
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var3", "pattern": "data" }
+    ]
+  },
+  {
+    "url": "http://ranapat.org:8090/posting.php?request=2",
+    "method": "post",
+    "headers": [
+      "User-Agent: testing"
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var2", "pattern": "regexp* \\[IDENTIFIER\\] => ([0-9a-zA-Z \\.\\-=\\?\\&\\/]+)" }
+    ]
+  },
+  {
+    "url": "http://ranapat.org:8090/posting.php?request=1",
+    "method": "post",
+    "headers": [
+      "User-Agent: testing"
+    ],
+    "body": "k1=${var1}&k2=${var2}&k3=${var3}&k4=${var4}",
+    "variables": [
+      { "name": "var1", "pattern": "data" },
+      { "name": "var4", "value": "var4 value", "pattern": "data" }
+    ]
+  }
+]
