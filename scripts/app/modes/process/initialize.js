@@ -8,39 +8,40 @@ const initialize = (path, executor, section, ...args) => {
   resetPaneP();
 
   try {
+    layout.logsP.append(labels.node_executing + ' ' + section);
+
     executor.process(section).then(({ request, response }) => {
-      layout.logsP.text += labels.node_executed + ' ' + section + '\n';
+      layout.logsP.append(labels.node_executed + ' ' + section);
 
-      layout.paneP.text += 'Request:' + '\n';
-      layout.paneP.text += '  Url: ' + request.url + '\n';
-      layout.paneP.text += '  Method: ' + request.method + '\n';
-      layout.paneP.text += '  Headers:' + '\n';
+      layout.paneP.append(labels.request.label);
+      layout.paneP.append('  ' + labels.request.url + ' ' + request.url);
+      layout.paneP.append('  ' + labels.request.method + ' ' + request.method);
+      layout.paneP.append('  ' + labels.request.headers);
       for (const header of request.headers) {
-        layout.paneP.text += '    ' + header + '\n';
+        layout.paneP.append('    ' + header);
       }
-      layout.paneP.text += '  Body: ' + request.body + '\n';
+      layout.paneP.append('  ' + labels.request.body + ' ' + request.body);
 
-      layout.paneP.text += '\n';
-      layout.paneP.text += 'Response:' + '\n';
+      layout.paneP.append('');
 
-      layout.paneP.text += '  Variables:' + '\n';
+      layout.paneP.append(labels.response.label);
+      layout.paneP.append('  ' + labels.response.variables);
       for (const variable of response.variables) {
-        layout.paneP.text += '    ' + `${variable.name} : ${variable.value}` + '\n';
+        layout.paneP.append('    ' + `${variable.name} : ${variable.value}`);
       }
-
-      layout.paneP.text += '  Body:' + '\n';
-      layout.paneP.text += prettyjson.render(response.data) + '\n';
+      layout.paneP.append('  ' + labels.response.body);
+      layout.paneP.append(prettyjson.render(response.data));
 
       layout.pane.scroll = layout.paneP.options.offset;
 
       set('details', path, executor);
     }).catch(error => {
-      layout.logsP.text += error + '\n';
+      layout.logsP.append(error);
 
       set('details', path, executor);
     });
   } catch (e) {
-    layout.logsP.text += e + '\n';
+    layout.logsP.append(e);
 
     set('details', path, executor);
   }

@@ -21,10 +21,10 @@ const keyboard = () => {
       const result = load(path);
       if (result !== undefined) {
         layout.pane.label = `* ${path} *`;
-        layout.logsP.text += labels.loading_complete + '\n';
+        layout.logsP.append(labels.loading_complete);
 
         const nodes = result.executor.chain.nodes.length;
-        layout.logsP.text += labels.nodes_count + ' ' + nodes + '\n';
+        layout.logsP.append(labels.nodes_count + ' ' + nodes);
 
         stdin.removeListener('data', handler);
 

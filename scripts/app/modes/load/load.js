@@ -15,10 +15,10 @@ const load = (path) => {
 
       return { path, executor };
     } else {
-      layout.logsP.text += labels.project_empty + '\n';
+      layout.logsP.append(labels.project_empty);
     }
   } catch (e) {
-    layout.logsP.text += e + '\n';
+    layout.logsP.append(e);
   }
 
   return undefined;

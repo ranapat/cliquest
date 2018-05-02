@@ -12,7 +12,7 @@ const initialize = (path, executor, ...args) => {
   executor.tracer = (request, response) => {
     const layout = getLayout();
 
-    layout.logsP.text += labels.request_executed + ' [' + request.method + '] ' + request.url + '\n';
+    layout.logsP.append(labels.request_executed + ' [' + request.method + '] ' + request.url);
   };
 
   const variables = [];
@@ -27,7 +27,7 @@ const initialize = (path, executor, ...args) => {
     ++index;
   }
   for (const variable of variables) {
-    layout.variablesP.text += '[' + variable.index + '] ' + variable.variable.name + '\n' + '  ' + variable.variable.value + '\n';
+    layout.variablesP.append('[' + variable.index + '] ' + variable.variable.name + '\n' + '  ' + variable.variable.value);
   }
 };
 
