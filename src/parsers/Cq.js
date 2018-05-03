@@ -10,6 +10,8 @@ class Cq extends Parser {
         const sec = new Section();
         const request = new Request();
 
+        sec.name = section.name;
+
         request.url = section.url;
         request.headers = section.headers;
         request.method = section.method;

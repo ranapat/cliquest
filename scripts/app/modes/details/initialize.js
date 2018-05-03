@@ -18,7 +18,13 @@ const initialize = (path, executor, ...args) => {
   };
 
   for (const variable of analyzer.variables) {
-    layout.variablesP.append('[' + variable.index + '] ' + (variable.variable.persist === 'true' || variable.variable.persist === true? '*' : '') + variable.variable.name + '\n' + '  ' + variable.variable.value);
+    layout.variablesP.append(
+      '[' + variable.index + '] '
+        + (variable.variable.persist === 'true' || variable.variable.persist === true ? '*' : '')
+        + variable.variable.name + '\n'
+        + '  '
+        + (variable.variable.value ? variable.variable.value.length > 17 ? variable.variable.value.substr(0, 17) + '...' : variable.variable.value : 'undefined')
+    );
   }
 };
 

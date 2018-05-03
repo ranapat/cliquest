@@ -1,42 +1,87 @@
 [
   {
-    "url": "http://localhost:3000/example?welcome=true-for-sure",
+    "name": "Content Endpoint",
+    "url": "https://business-school-development.k8.akelius.com/content/api/v1",
     "method": "get",
     "headers": [
     ],
     "body": "",
     "variables": [
-      { "name": "var1", "persist": "false", "pattern": "query.welcome" }
+      { "name": "authorization", "persist": "true", "pattern": "_links.authorizationService.href" }
     ]
   },
   {
-    "url": "http://localhost:3000/example?welcome=${var1}",
-    "method": "get",
-    "headers": [
-    ],
-    "body": "",
-    "variables": [
-      { "name": "var2", "persist": "false", "pattern": "query.welcome" }
-    ]
-  },
-  {
-    "url": "http://localhost:3000/example?welcome=${var2}",
+    "name": "Registe Anonymous",
+    "url": "${authorization}users/anonymous/",
     "method": "post",
     "headers": [
     ],
     "body": "",
     "variables": [
-      { "name": "var3", "persist": "true", "pattern": "query.welcome" }
+      { "name": "userId", "persist": "true", "pattern": "userId" },
+      { "name": "username", "persist": "true", "pattern": "username" },
+      { "name": "userType", "persist": "true", "pattern": "userType" },
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
     ]
   },
   {
-    "url": "http://localhost:3000/example?welcome=${var3}",
+    "name": "Get token for anonymous user",
+    "url": "${authorization}tokens/anonymous/",
     "method": "post",
     "headers": [
     ],
-    "body": "",
+    "body": {
+      "username": "${username}"
+    },
     "variables": [
-      { "name": "var4", "persist": true, "pattern": "query.welcome" }
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Refresh token",
+    "url": "${authorization}tokens/refresh/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "refreshToken": "${refreshToken}"
+    },
+    "variables": [
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Register anonymous user",
+    "url": "${authorization}users/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "username": "${username}",
+      "password": "${password}",
+      "userId": "${userId}"
+    },
+    "variables": [
+      { "name": "username", "value": "testuser423452345" },
+      { "name": "password", "value": "testpassword123123123" },
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Login with real user",
+    "url": "${authorization}tokens/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "username": "${username}",
+      "password": "${password}"
+    },
+    "variables": [
     ]
   }
 ]

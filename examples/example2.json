@@ -1,0 +1,42 @@
+[
+  {
+    "url": "http://localhost:3000/example?welcome=true-for-sure",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var1", "persist": "false", "pattern": "query.welcome" }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/example?welcome=${var1}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var2", "persist": "false", "pattern": "query.welcome" }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/example?welcome=${var2}",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var3", "persist": "true", "pattern": "query.welcome" }
+    ]
+  },
+  {
+    "url": "http://localhost:3000/example?welcome=${var3}",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "var4", "persist": true, "pattern": "query.welcome" }
+    ]
+  }
+]

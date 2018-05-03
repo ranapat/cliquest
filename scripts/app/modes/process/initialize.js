@@ -8,10 +8,14 @@ const initialize = (path, executor, section, ...args) => {
   resetPaneP();
 
   try {
-    layout.logsP.append(labels.node_executing + ' ' + section);
+    layout.logsP.append(labels.node_executing + ' ' + '(' + section +') ' + executor.chain.nodes[section].name);
 
     executor.process(section).then(({ request, response }) => {
-      layout.logsP.append(labels.node_executed + ' ' + section);
+      layout.logsP.append(labels.node_executed + ' ' + '(' + section +') ' + executor.chain.nodes[section].name);
+
+      layout.paneP.append(executor.chain.nodes[section].name);
+
+      layout.paneP.append('');
 
       layout.paneP.append(labels.request.label);
       layout.paneP.append('  ' + labels.request.url + ' ' + request.url);
@@ -20,7 +24,12 @@ const initialize = (path, executor, section, ...args) => {
       for (const header of request.headers) {
         layout.paneP.append('    ' + header);
       }
-      layout.paneP.append('  ' + labels.request.body + ' ' + request.body);
+      if (typeof request.body === 'object') {
+        layout.paneP.append('  ' + labels.request.body);
+        layout.paneP.append(prettyjson.render(request.body));
+      } else {
+        layout.paneP.append('  ' + labels.request.body + ' ' + request.body);
+      }
 
       layout.paneP.append('');
 

@@ -10,14 +10,19 @@ class Persistance {
     try {
       jsonfile.writeFileSync(this.path, data.filter(variable => variable.variable.persist === 'true' || variable.variable.persist === true));
     } catch (e) {
-      console.log('some error', e)
-      process.exit();
+      //
     }
   }
 
   get variables() {
-    if (fs.statSync(this.path).isFile()) {
-      return jsonfile.readFileSync(this.path);
+    try {
+      if (fs.statSync(this.path).isFile()) {
+        return jsonfile.readFileSync(this.path);
+      } else {
+        return [];
+      }
+    } catch (e) {
+      return [];
     }
   }
 }
