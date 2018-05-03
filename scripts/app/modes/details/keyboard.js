@@ -24,7 +24,7 @@ const keyboard = () => {
     } else if (keycode(key) == 16) {
       if (layout.paneP.text.trim()) {
         let offset = layout.paneP.options.offset;
-        offset = offset > .25 ? (offset - .25) : 0;
+        offset = offset > .15 ? (offset - .15) : 0;
         layout.paneP.options.offset = offset;
         layout.paneP.options = layout.paneP.options;
         layout.pane.scroll = layout.paneP.options.offset;
@@ -32,7 +32,7 @@ const keyboard = () => {
     } else if (keycode(key) == 14) {
       if (layout.paneP.text.trim()) {
         let offset = layout.paneP.options.offset;
-        offset = offset < .75 ? (offset + .25) : 1;
+        offset = offset < .85 ? (offset + .15) : 1;
         layout.paneP.options.offset = offset;
         layout.paneP.options = layout.paneP.options;
         layout.pane.scroll = layout.paneP.options.offset;

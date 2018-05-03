@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Content Endpoint",
+    "url": "https://business-school-development.k8.akelius.com/content/api/v1",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "authorization", "persist": "true", "pattern": "_links.authorizationService.href" }
+    ]
+  },
+  {
+    "name": "Registe Anonymous",
+    "url": "${authorization}users/anonymous/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "userId", "persist": "true", "pattern": "userId" },
+      { "name": "username", "persist": "true", "pattern": "username" },
+      { "name": "userType", "persist": "true", "pattern": "userType" },
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Get token for anonymous user",
+    "url": "${authorization}tokens/anonymous/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "username": "${username}"
+    },
+    "variables": [
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Refresh token",
+    "url": "${authorization}tokens/refresh/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "refreshToken": "${refreshToken}"
+    },
+    "variables": [
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Register anonymous user",
+    "url": "${authorization}users/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "username": "${username}",
+      "password": "${password}",
+      "userId": "${userId}"
+    },
+    "variables": [
+      { "name": "username", "value": "testuser423452345" },
+      { "name": "password", "value": "testpassword123123123" },
+      { "name": "accessToken", "persist": "true", "pattern": "accessToken" },
+      { "name": "refreshToken", "persist": "true", "pattern": "refreshToken" }
+    ]
+  },
+  {
+    "name": "Login with real user",
+    "url": "${authorization}tokens/",
+    "method": "post",
+    "headers": [
+    ],
+    "body": {
+      "username": "${username}",
+      "password": "${password}"
+    },
+    "variables": [
+    ]
+  }
+]

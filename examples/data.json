@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Content Endpoint",
+    "url": "https://business-school-development.k8.akelius.com/content/api/v1",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "subjects", "persist": "true", "pattern": "_links.subjects.href" }
+    ]
+  },
+  {
+    "name": "Subjects List",
+    "url": "${subjects}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "subjectId", "persist": "true", "pattern": "_embedded.subjects[0].id" },
+      { "name": "subjectTitle", "persist": "true", "pattern": "_embedded.subjects[0].title" }
+    ]
+  },
+  {
+    "name": "Subjects Details",
+    "url": "${subjects}${subjectId}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "subjectDetailsCourse", "persist": "true", "pattern": "_embedded.rootUnit._links.self.href" }
+    ]
+  },
+`  {
+    "name": "Subject Details Course",
+    "url": "${subjectDetailsCourse}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "firstCourse", "persist": "true", "pattern": "_embedded.connectors[0]._embedded.target._links.self.href" }
+    ]
+  },
+  {
+    "name": "First Course",
+    "url": "${firstCourse}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "firstLesson", "persist": "true", "pattern": "_embedded.connectors[0]._embedded.target._links.self.href" }
+    ]
+  },
+  {
+    "name": "First Lesson",
+    "url": "${firstLesson}",
+    "method": "get",
+    "headers": [
+    ],
+    "body": "",
+    "variables": [
+      { "name": "firstLessonTitle", "persist": "true", "pattern": "_embedded.mediaUnits[0].title" },
+      { "name": "firstLessonStoryline", "persist": "true", "pattern": "_embedded.mediaUnits[0]._embedded.representations[0].resourceLink" },
+      { "name": "firstLessonFirstTag", "persist": "true", "pattern": "_embedded.tags[0].name" }
+    ]
+  }
+]
